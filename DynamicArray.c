@@ -202,26 +202,25 @@ void free_array(DynamicArray *arr) {
 
 int main() {
     DynamicArray arr;
-    
-    // Start with a small capacity of 2 to see the resizing in action
-    init_array(&arr, 2);
-
-    insert_element(&arr, 10);
-    insert_element(&arr, 20);
-    insert_element(&arr, 30); // This will trigger the "Double" logic
-    print_array(&arr);
-
-    insert_element(&arr, 40);
-    insert_element(&arr, 50); // This will trigger another "Double" logic
-    print_array(&arr);
-
-    printf("\nTesting Shrinkage:\n");
-    remove_element(&arr); // size 4, cap 8
-    remove_element(&arr); // size 3, cap 8
-    remove_element(&arr); // size 2, cap 8 (size < 25% of 8? Yes: 1 < 2)
-    remove_element(&arr); // Trigger shrink
-    
-    print_array(&arr);
+    int n;
+    printf("Enter the initial size of the Dynamic Array\n");
+    scanf("%d",&n);
+    init_array(&arr, n);
+    char op;
+    do{
+        scanf(" %c",&op);
+        if(op=='i'){
+            int d;
+            scanf("%d",&d);
+            insert_element(&arr,d);
+        }
+        else if(op=='p'){
+            print_array(&arr);
+        }
+        else if(op=='r'){
+            remove_element(&arr);
+        }
+    }while(op!='e');
 
     free_array(&arr);
     return 0;
