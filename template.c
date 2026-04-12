@@ -21,7 +21,7 @@ meta_ptr get_block_addr(void *p){
     return (meta_ptr)((char*)p-BLOCK_SIZE);
 }
 
-meta_ptr merge_blocks(meta_ptr block){
+meta_ptr merge_blocks(meta_ptr block){// reduces external fragmentation
     if(block->next&&block->next->free){// if next block is available and it is free
         block->size += BLOCK_SIZE + block->next->size;
         block->next = block->next->next; // connect to the block after the next block
@@ -42,7 +42,7 @@ meta_ptr find_suitable_block(meta_ptr*last, size_t size){
     return b;
 }
 
-void split_space(meta_ptr block,size_t size){
+void split_space(meta_ptr block,size_t size){ // reduces internal fragmentation
     meta_ptr new_block;
     new_block = (meta_ptr)(block->data+size);
     new_block->size = block->size - size  - BLOCK_SIZE;
