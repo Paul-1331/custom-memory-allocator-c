@@ -166,7 +166,9 @@ void free_matrix(int **matrix, int rows) {
 }
 
 int main() {
-    int r = 3, c = 3;
+    int r,c;
+    printf("Enter the rows and cols:\n");
+    scanf("%d%d",&r,&c);
     printf("Creating %dx%d matrix using my_calloc...\n", r, c);
     
     int **matrix = create_matrix(r, c);

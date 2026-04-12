@@ -188,7 +188,7 @@ void free_list(Node**head){
     Node*next;
     while(x){
         next = x->next;
-        x->next = NULL;
+        x->next = NULL; // IMPORTANT: Remove the connection before calling free
         my_free(x);
         x = next;
     }

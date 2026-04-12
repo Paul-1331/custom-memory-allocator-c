@@ -127,3 +127,31 @@ void*realloc(void*ptr,size_t size){
     }
     return new_ptr;
 }
+
+
+// Dynamic Array Implementation
+
+typedef struct{
+    int *data;
+    int size;
+    int capacity;
+}DynamicArray;
+
+void init_array(DynamicArray*arr,int initial){
+    arr->data = (int*)my_malloc(sizeof(int)*initial);
+    if(!arr->data){
+        printf("error\n");
+        return;
+    }
+    arr->size = 0;
+    arr->capacity = initial;
+}
+
+void insert_element(DynamicArray*arr,int val){
+    if(arr->size==arr->capacity){
+        arr->capacity*=2;
+
+        arr->data = (int*)my_realloc(arr->data,arr->capacity*sizeof(int));
+    }
+    arr->data[arr->size++] = val;
+}
