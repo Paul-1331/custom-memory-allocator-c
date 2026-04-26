@@ -21,7 +21,6 @@ meta_ptr get_block_addr(void *p) {
     return (meta_ptr)((char*)p - BLOCK_SIZE);
 }
 
-// --- NEW MERGING LOGIC ---
 meta_ptr merge_blocks(meta_ptr block) {
     if (block->next && block->next->free) {
         block->size += BLOCK_SIZE + block->next->size;
@@ -64,7 +63,7 @@ meta_ptr extend_heap(meta_ptr last, size_t size) {
     
     b->size = size;
     b->next = NULL;
-    b->prev = last; // CRITICAL CHANGE: Connects the back-link
+    b->prev = last;
     b->ptr = b->data;
     b->free = 0;
     if (last) last->next = b;
