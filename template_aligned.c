@@ -145,6 +145,8 @@ void *my_realloc(void *ptr, size_t size) {
     return new_ptr;
 }
 
+// --- Linked List Implementation ---
+
 typedef struct Node{
     int val;
     struct Node *next;
